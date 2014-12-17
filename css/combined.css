@@ -19,10 +19,13 @@ body {
 	width: 95%;
 }
 
-.inner-space img {
+.inner-space img, #img-2 {
     background - size: cover;
     background - position: 50 % 50 % ;
     width: 95%;
     height: auto;
     margin: 2% 2.5%;
+}
+#img-2 {
+	margin-top: -100%;
 }
