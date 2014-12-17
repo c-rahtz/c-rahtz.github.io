@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+body, div, p, h1, h2, h3, h4, h5, h6, img {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	width: 100%;
+	background-color: #aaa;
+}
+
+.inner-space {
+	width: 95%;
+	background-color: white;
+	border-radius: 12px;
+	height: 95%;
+}
