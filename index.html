@@ -13,7 +13,7 @@
 
 		<div class="page-head">
 			<!-- <h1>Craig Rahtz</h1> -->
-			<img id="dots-still" src="img/dots-still.gif">
+			<img id="image-container" src="img/dots-still.gif">
 			<div id="play-gif-button" class="arrow-right" data-gif="dots-sweep.gif"></div>
 		</div>
 	</div>
@@ -23,8 +23,12 @@
 
 		//creating a global object to hold my methods and properties
 		var cr = {
-			loadImage: function() {
-
+			loadImage: function(img) {
+				var swapImg;
+				swapImg = document.getElementById("image-container");
+				console.log(img);
+				swapImg.src = "img/" + img;
+				cr.playBtn.style.display = "none";
 			},
 			playClick: function(e) {
 				var btn, imageToLoad;
@@ -32,14 +36,21 @@
 				imageToLoad = btn.getAttribute("data-gif");
 				console.log(imageToLoad);
 				console.log("Play click.");
+				// cannot use 'this' below; must use explicit object because 'this'
+				// is different inside the event listener
+				// check this ish out sometime - http://www.w3.org/TR/DOM-Level-3-Events/#event-flow
+				//console.log(this); 
+				cr.loadImage(imageToLoad);
 			},
 			addlisteners: function(){
 				console.log("Adding listeners.");
-				cr.playBtn.addEventListener('click', this.playClick, false);
+				// playBtn is created in ready() and is then available in the cr object
+				cr.playBtn.addEventListener("click", this.playClick);
 			},
 			ready: function() {
 				console.log("We are young.");
-				this.playBtn = document.getElementById('play-gif-button');
+				// declaring these variables here creates them in the local object space
+				this.playBtn = document.getElementById("play-gif-button");
 				this.playBtn.style.display = "block";
 				this.addlisteners();
 			},
