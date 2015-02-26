@@ -8,15 +8,46 @@
 	<link rel="icon" type="image/x-icon" href="cr-bw-001.ico">
 </head>
 
-<body>
+<body onload="cr.ready();">
 	<div class="inner-space">
 
 		<div class="page-head">
 			<!-- <h1>Craig Rahtz</h1> -->
-			<img src="img/dots-still.gif" height="540" width="960" id="img-2">
+			<img id="dots-still" src="img/dots-still.gif">
+			<div id="play-gif-button" class="arrow-right" data-gif="dots-sweep.gif"></div>
 		</div>
 	</div>
 	<script type="text/javascript" src="js/preloadjs-NEXT.combined.js"></script>
+	<script type="text/javascript">
+		// keeping on-page script to reduce network calls - or just to keep things simple, heh
+
+		//creating a global object to hold my methods and properties
+		var cr = {
+			loadImage: function() {
+
+			},
+			playClick: function(e) {
+				var btn, imageToLoad;
+				btn = e.currentTarget;
+				imageToLoad = btn.getAttribute("data-gif");
+				console.log(imageToLoad);
+				console.log("Play click.");
+			},
+			addlisteners: function(){
+				console.log("Adding listeners.");
+				cr.playBtn.addEventListener('click', this.playClick, false);
+			},
+			ready: function() {
+				console.log("We are young.");
+				this.playBtn = document.getElementById('play-gif-button');
+				this.playBtn.style.display = "block";
+				this.addlisteners();
+			},
+
+		}
+
+	</script>
+
 </body>
 
 </html>

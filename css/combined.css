@@ -26,6 +26,31 @@ body {
     height: auto;
     margin: 2% 2.5%;
 }
-#img-2 {
+#dots-still {
 	/* margin-top: -100%; */
+}
+
+#play-gif-button {
+	position: absolute;
+	/* margin-left: 50%; */
+	/* margin-top: 50%; */
+	left: 50%;
+	top: 50%;
+	margin-left: -24px;
+	margin-top: -43px;
+	cursor: pointer;
+	display: none;
+}
+
+/* from http://davidwalsh.name/css-triangles */
+/* create an arrow that points right */
+div.arrow-right {
+	width: 0; 
+	height: 0; 
+	border-radius: 0px;
+	border-bottom: 40px solid transparent;  /* left arrow slant */
+	border-top: 40px solid transparent; /* right arrow slant */
+	border-left: 70px solid #AAAAAA; /* bottom, add background color here */
+	font-size: 0;
+	line-height: 0;
 }
