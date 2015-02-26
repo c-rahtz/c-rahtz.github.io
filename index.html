@@ -26,7 +26,7 @@
 			loadImage: function(img) {
 				var swapImg;
 				swapImg = document.getElementById("image-container");
-				console.log(img);
+				// console.log(img);
 				swapImg.src = "img/" + img;
 				cr.playBtn.style.display = "none";
 			},
@@ -34,8 +34,10 @@
 				var btn, imageToLoad;
 				btn = e.currentTarget;
 				imageToLoad = btn.getAttribute("data-gif");
-				console.log(imageToLoad);
-				console.log("Play click.");
+				
+				//console.log(imageToLoad);
+				//console.log("Play click.");
+				
 				// cannot use 'this' below; must use explicit object because 'this'
 				// is different inside the event listener
 				// check this ish out sometime - http://www.w3.org/TR/DOM-Level-3-Events/#event-flow
@@ -43,7 +45,7 @@
 				cr.loadImage(imageToLoad);
 			},
 			addlisteners: function(){
-				console.log("Adding listeners.");
+				//console.log("Adding listeners.");
 				// playBtn is created in ready() and is then available in the cr object
 				cr.playBtn.addEventListener("click", this.playClick);
 			},
