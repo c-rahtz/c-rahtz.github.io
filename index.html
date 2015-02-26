@@ -16,9 +16,13 @@
 			<!-- <h1>Craig Rahtz</h1> -->
 			<img id="image-container" src="img/dots-still.gif">
 			<div id="play-gif-button" class="arrow-right" data-gif="dots-sweep.gif"></div>
+			<!-- need to refactor this markup; size text blocks button event -->
 			<h4 id="size-notice">9.2mb</h4>
 		</div>
 	</div>
+<!-- 	
+	<script type="text/javascript" src="js/preloadjs-NEXT.combined.js"></script>
+-->
 	<script type="text/javascript">
 		// keeping on-page script to reduce network calls - or just to keep things simple, heh
 
@@ -28,6 +32,9 @@
 				var swapImg, sizeNotice;
 				swapImg = document.getElementById("image-container");
 				// console.log(img);
+				// TODO:
+				// instead of changing src, use preloader to load new image and replace
+				// also include preload progress
 				swapImg.src = "img/" + img;
 				cr.playBtn.style.display = "none";
 				document.getElementById("size-notice").style.display = "none";
