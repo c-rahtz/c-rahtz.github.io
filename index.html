@@ -4,6 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Craig Rahtz</title>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="css/combined.css">
 	<link rel="icon" type="image/x-icon" href="cr-bw-001.ico">
 </head>
@@ -15,20 +16,22 @@
 			<!-- <h1>Craig Rahtz</h1> -->
 			<img id="image-container" src="img/dots-still.gif">
 			<div id="play-gif-button" class="arrow-right" data-gif="dots-sweep.gif"></div>
+			<h4 id="size-notice">9.2mb</h4>
 		</div>
 	</div>
-	<script type="text/javascript" src="js/preloadjs-NEXT.combined.js"></script>
 	<script type="text/javascript">
 		// keeping on-page script to reduce network calls - or just to keep things simple, heh
 
 		//creating a global object to hold my methods and properties
 		var cr = {
 			loadImage: function(img) {
-				var swapImg;
+				var swapImg, sizeNotice;
 				swapImg = document.getElementById("image-container");
 				// console.log(img);
 				swapImg.src = "img/" + img;
 				cr.playBtn.style.display = "none";
+				document.getElementById("size-notice").style.display = "none";
+
 			},
 			playClick: function(e) {
 				var btn, imageToLoad;
