@@ -15,9 +15,9 @@
 		<div id="page-head">
 			<!-- <h1>Craig Rahtz</h1> -->
 			<img id="image-container" src="img/dots-still.gif">
-			<div id="play-gif-button" class="arrow-right" data-gif="dots-sweep.gif"></div>
-			<!-- need to refactor this markup; size text blocks button event -->
+			<div id="arrow-right" class="arrow-right button-element"></div>
 			<h4 id="size-notice">9.2mb</h4>
+			<div id="play-gif-button" class="button-element" data-gif="dots-sweep.gif"></div>
 		</div>
 	</div>
  	
@@ -32,11 +32,12 @@
 				// console.log(e);
 				cr.playBtn.style.display = "none";
 				document.getElementById("size-notice").style.display = "none";
+				document.getElementById("arrow-right").style.display = "none";
 				document.getElementById("image-container").src = e.result.src;
 			},
 			handleFileProgress: function(e) {
 				var perc;
-				perc = e.progress * 100;
+				perc = Math.floor(e.progress * 100);
 				perc = perc + "%"
 				document.getElementById("size-notice").innerHTML = perc;
 
@@ -71,7 +72,7 @@
 				this.playBtn.addEventListener("click", this.playClick);
 				this.preload = new createjs.LoadQueue();
 				this.preload.addEventListener("fileload", cr.handleFileComplete);
-				this.preload.addEventListener("fileprogress", cr.handleFileProgress);
+				this.preload.addEventListener("progress", cr.handleFileProgress);
 			},
 			ready: function() {
 				//console.log("We are young.");
