@@ -3,26 +3,36 @@
 body, div, p, h1, h2, h3, h4, h5, h6, img {
 	margin: 0;
 	padding: 0;
-	font-family: Arial, sans-serif;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 1.0em;
 }
 
 body {
 	background-color: #aaa;
 	width: 100%;
 }
-
+h1 {
+	font-size: 1.7em
+}
 h4 {
 	font-size: 1.0em;
 }
-
+ol, ul {
+	margin: 0.7em 0;
+}
 
 .inner-space {
 	background-color: white;
 	/* border-radius: 12px; */
 	height: 95%;
-	margin: 2.5% 2.5%;
+	margin: 2.5% 2.5% 0 2.4%;
 	position: relative;
 	width: 95%;
+}
+#page-description {
+	margin-top: 0;
+	padding: 2% 4.5%;
+	width: 86%;
 }
 
 .inner-space img {

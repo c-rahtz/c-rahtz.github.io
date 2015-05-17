@@ -2,90 +2,101 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<title>Craig Rahtz</title>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="css/combined.css">
-	<link rel="icon" type="image/x-icon" href="cr-bw-001.ico">
+    <meta charset="utf-8">
+    <title>Craig Rahtz</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/combined.css">
+    <link rel="icon" type="image/x-icon" href="cr-bw-001.ico">
 </head>
 
 <body onload="cr.ready();">
-	<div class="inner-space">
+    <div class="inner-space">
+        <div id="page-head">
+            <!-- <h1>Craig Rahtz</h1> -->
+            <img id="image-container" src="img/dots-still.gif" alt="Animation poster frame">
+            <div id="arrow-right" class="arrow-right button-element"></div>
+            <h4 id="size-notice">9.2mb</h4>
+            <div id="play-gif-button" class="button-element" data-gif="dots-sweep.gif"></div>
+        </div>
+    </div>
+    <div id="page-description" class="inner-space">
+        <h1>About This Page</h1>
+        <p>This page is meant to represent key elements of my skill set in a very simple and straight forward manner.</p>
+        <ol>
+            <li>The site is presented using hand-coded HTML, CSS, and JavaScript.</li>
+            <li>The interactivity is powered by native, object-oriented JavaScript with the use of <a href="http://createjs.com/PreloadJS" title="CreateJS | A suite of Javascript libraries and tools designed for working with HTML5" target="_blank">PreloadJS</a> to handle file loading.</li>
+            <li>The animation mixes both 2D and 3D techniques, transferring camera data between Adobe After Effects and Lightwave3D</li>
+            <li>This page is a public GitHub repo mapped to a subdomain of rahtz.net using a CNAME record entry.</li>
+        </ol>
+        <p>This is a work in progress. Planned improvements:</p>
+        <ul>
+            <li>Page redesign and style updates</li>
+            <li>Button to stop looping GIF</li>
+            <li>HTML refactoring</li>
+        </ul>
+    </div>
+    <script type="text/javascript" src="https://code.createjs.com/preloadjs-0.6.0.min.js"></script>
+    <script type="text/javascript">
+    // keeping on-page script to reduce network calls - or just to keep things simple, jeah
 
-		<div id="page-head">
-			<!-- <h1>Craig Rahtz</h1> -->
-			<img id="image-container" src="img/dots-still.gif">
-			<div id="arrow-right" class="arrow-right button-element"></div>
-			<h4 id="size-notice">9.2mb</h4>
-			<div id="play-gif-button" class="button-element" data-gif="dots-sweep.gif"></div>
-		</div>
-	</div>
- 	
-	<script type="text/javascript" src="https://code.createjs.com/preloadjs-0.6.0.min.js"></script>
+    //creating a global object to hold my methods and properties
+    var cr = {
+        handleFileComplete: function(e) {
+            // console.log(e);
+            cr.playBtn.style.display = "none";
+            document.getElementById("size-notice").style.display = "none";
+            document.getElementById("arrow-right").style.display = "none";
+            document.getElementById("image-container").src = e.result.src;
+        },
+        handleFileProgress: function(e) {
+            var perc;
+            perc = Math.floor(e.progress * 100);
+            perc = perc + "%"
+            document.getElementById("size-notice").innerHTML = perc;
 
-	<script type="text/javascript">
-		// keeping on-page script to reduce network calls - or just to keep things simple, heh
+        },
+        loadImage: function(img) {
+            var imgPath, sizeNotice, preload;
+            imgPath = document.getElementById("image-container");
+            // console.log(img);
+            document.getElementById("size-notice").innerHTML = "0%";
+            imgPath = "img/" + img;
+            //console.log(imgPath);
+            cr.preload.loadFile(imgPath);
 
-		//creating a global object to hold my methods and properties
-		var cr = {
-			handleFileComplete: function(e) {
-				// console.log(e);
-				cr.playBtn.style.display = "none";
-				document.getElementById("size-notice").style.display = "none";
-				document.getElementById("arrow-right").style.display = "none";
-				document.getElementById("image-container").src = e.result.src;
-			},
-			handleFileProgress: function(e) {
-				var perc;
-				perc = Math.floor(e.progress * 100);
-				perc = perc + "%"
-				document.getElementById("size-notice").innerHTML = perc;
+        },
+        playClick: function(e) {
+            var btn, imageToLoad;
+            btn = e.currentTarget;
+            imageToLoad = btn.getAttribute("data-gif");
 
-			},
-			loadImage: function(img) {
-				var imgPath, sizeNotice, preload;
-				imgPath = document.getElementById("image-container");
-				// console.log(img);
-				document.getElementById("size-notice").innerHTML = "0%";
-				imgPath = "img/" + img;
-				//console.log(imgPath);
-				cr.preload.loadFile(imgPath);
+            //console.log(imageToLoad);
+            //console.log("Play click.");
 
-			},
-			playClick: function(e) {
-				var btn, imageToLoad;
-				btn = e.currentTarget;
-				imageToLoad = btn.getAttribute("data-gif");
-				
-				//console.log(imageToLoad);
-				//console.log("Play click.");
-				
-				// cannot use 'this' below; must use explicit object because 'this'
-				// is different inside the event listener
-				// check this ish out sometime - http://www.w3.org/TR/DOM-Level-3-Events/#event-flow
-				//console.log(this); 
-				cr.loadImage(imageToLoad);
-			},
-			addlisteners: function(){
-				//console.log("Adding listeners.");
-				// playBtn is created in ready() and is then available in the cr object
-				this.playBtn.addEventListener("click", this.playClick);
-				this.preload = new createjs.LoadQueue();
-				this.preload.addEventListener("fileload", cr.handleFileComplete);
-				this.preload.addEventListener("progress", cr.handleFileProgress);
-			},
-			ready: function() {
-				//console.log("We are young.");
-				// declaring these variables here creates them in the local object space
-				this.playBtn = document.getElementById("play-gif-button");
-				this.playBtn.style.display = "block";
-				this.addlisteners();
-			},
+            // cannot use 'this' below; must use explicit object because 'this'
+            // is different inside the event listener
+            // check this ish out sometime - http://www.w3.org/TR/DOM-Level-3-Events/#event-flow
+            //console.log(this); 
+            cr.loadImage(imageToLoad);
+        },
+        addlisteners: function() {
+            // console.log("Adding listeners.");
+            // playBtn is created in ready() and is then available in the cr object
+            this.playBtn.addEventListener("click", this.playClick);
+            this.preload = new createjs.LoadQueue();
+            this.preload.addEventListener("fileload", cr.handleFileComplete);
+            this.preload.addEventListener("progress", cr.handleFileProgress);
+        },
+        ready: function() {
+            //console.log("We are young.");
+            // declaring these variables here creates them in the local object space
+            this.playBtn = document.getElementById("play-gif-button");
+            this.playBtn.style.display = "block";
+            this.addlisteners();
+        },
 
-		}
-
-	</script>
-
+    }
+    </script>
 </body>
 
 </html>
